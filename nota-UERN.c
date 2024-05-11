@@ -13,7 +13,7 @@ float qnt_preciso(float n1, float n2){
 int main(){
 
     float nota1, nota2, nota3, nota_necessaria;
-    nota_necessaria = 7.0;
+    nota_necessaria = 7.0; //Caso a média final da UERN mude, só precisará alterar este valor manualmente.
     int escolha, repetidor = 1; //Repetidor recebe inicialmente 1, que equivale a 'verdadeiro', abrindo o loop.
 
     do{
