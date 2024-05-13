@@ -2,7 +2,7 @@
 
 //Função que calcula quanto o aluno deve obter na 2ª nota para não ficar de 4ª prova.
 float previsao_n1(float n1){
-    return ((105 - 60 - n1 * 4) / 5);
+    return ((105 - 60 - n1 * 4) / 5.0);
 }
 
 //Função que calcula quanto o aluno precisará na 3ª avaliação.
@@ -12,7 +12,12 @@ float qnt_preciso(float n1, float n2){
 
 //Função que calcula a nota final aplicando os pesos 4, 5 e 6.
 float media_final(float n1, float n2, float n3){ 
-    return ((n1 * 4 + n2 * 5 + n3 * 6) / 15);
+    return ((n1 * 4 + n2 * 5 + n3 * 6) / 15.0);
+}
+
+//Função que calcula qual nota o aluno precisará para a 4ª avaliação.
+float nota_quarta(float n1, float n2, float n3){
+    return 12 - media_final(n1, n2, n3);
 }
 
 int main(){
@@ -45,8 +50,10 @@ int main(){
 
                 if(qnt_preciso(nota1, nota2) <= 10)
                     printf("Da pra passar!\n\n");
-                else
-                    printf("Ficou de quarta prova!\n\n");
+                else{
+                    printf("Ficou de quarta prova!\n");
+                    printf("Se tirar 10.00 na terceira, precisara tirar na quarta prova: %.2f\n\n", nota_quarta(nota1, nota2, 10));
+                }
             break;
 
             case 3:
@@ -56,12 +63,18 @@ int main(){
                 scanf("%f", &nota2);
                 printf("Nota prova 3: ");
                 scanf("%f", &nota3);
-                printf("Sua nota final: %.2f\n", media_final(nota1, nota2, nota3));
+                printf("\nSua nota final: %.2f\n", media_final(nota1, nota2, nota3));
 
                 if(media_final(nota1, nota2, nota3) >= nota_necessaria)
                     printf("Passou! Parabens!\n\n");
-                else
-                    printf("Ficou de quarta prova!\n\n");
+                else if(nota_quarta(nota1, nota2, nota3) > 10){
+                    printf("Infelizmente esta reprovado! Tente novamente no proximo periodo.\n");
+                    printf("Voce precisaria tirar na quarta prova: %.2f\n\n", nota_quarta(nota1, nota2, nota3));
+                }
+                else{
+                    printf("Ficou de quarta prova!\n");
+                    printf("Precisara tirar na quarta prova: %.2f\n\n", nota_quarta(nota1, nota2, nota3));
+                }
             break;
 
             case 4:
